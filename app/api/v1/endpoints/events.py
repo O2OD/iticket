@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, Path, Body, Query
+from fastapi import APIRouter, Depends, Path, Body, Query
 from sqlalchemy.orm import Session
 
 from app.services.event_service import EventService

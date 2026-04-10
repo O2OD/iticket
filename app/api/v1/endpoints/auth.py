@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Body, Depends, HTTPException, status
+from fastapi import APIRouter, Body, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
@@ -9,7 +9,6 @@ from app.db.session import get_db
 from app.models.user import User
 from app.schemas.user import (
     UserRegistration,
-    UserLogin,
     UserLoginResponse,
     UserResponse,
     RefreshRequest,

@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Body, Query, Path
+from fastapi import APIRouter, Depends, Body, Path
 
 from app.core.security import get_user, get_admin
 from app.db.session import get_db

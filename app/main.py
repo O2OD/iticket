@@ -7,7 +7,7 @@ from app.db.init_db import init_db
 app = FastAPI(title="Iticket API")
 app.include_router(router)
 
-init_db()
+# init_db()
 
 
 @app.get("/")

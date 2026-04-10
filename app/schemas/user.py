@@ -1,6 +1,6 @@
 import enum
 
-from pydantic import BaseModel, Field, model_validator, field_validator, EmailStr
+from pydantic import BaseModel, ConfigDict, Field, model_validator, field_validator, EmailStr
 
 
 class RoleEnum(str, enum.Enum):
@@ -39,6 +39,8 @@ class UserResponse(BaseModel):
     last_name: str | None
     email: EmailStr
     password_hash: str
+
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserLogin(BaseModel):

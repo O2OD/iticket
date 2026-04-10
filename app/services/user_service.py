@@ -6,7 +6,6 @@ from app.models import User
 from app.core.security import (
     generate_token,
     generate_refresh_token,
-    verify_access_token,
     verify_refresh_token,
     hash_password,
     verify_password,

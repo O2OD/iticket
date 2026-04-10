@@ -45,6 +45,9 @@ def verify_access_token(token: str) -> dict:
 
     if payload.get("type") != "access":
         raise HTTPException(401, "Invalid token type")
+    
+    if payload.get("exp") < datetime.utcnow().timestamp():
+        raise HTTPException(401, "Token has expired")
 
     return payload
 
@@ -64,14 +67,14 @@ def get_user(
 ) -> User:
     payload = verify_access_token(token)
 
-    username = payload.get("username")
-    if not username:
+    sub = payload.get("sub")
+    if not sub:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid token",
         )
 
-    user = db.query(User).filter_by(username=username).first()
+    user = db.query(User).filter_by(id=sub).first()
 
     if not user:
         raise HTTPException(

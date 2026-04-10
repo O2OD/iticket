@@ -1,17 +1,17 @@
 import enum
 from datetime import datetime
 
-from pydantic import BaseModel, Field, model_validator, field_validator, EmailStr
+from pydantic import BaseModel, Field, field_validator
 
 
-class TicetTypeEnum(str, enum.Enum):
+class TicketTypeEnum(str, enum.Enum):
     STANDART = "standard"
     VIP = "vip"
     VVIP = "vvip"
 
 
 class TicketQuantity(BaseModel):
-    name: TicetTypeEnum
+    name: TicketTypeEnum
     price: float = Field(gt=0)
     quantity: int = Field(gt=0)
 

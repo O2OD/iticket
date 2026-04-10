@@ -1,7 +1,7 @@
 import enum
-from datetime import datetime
-
+import uuid
 from sqlalchemy import String, ForeignKey, Enum
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base, TimestampMixin
@@ -18,9 +18,17 @@ class Ticket(Base, TimestampMixin):
     __tablename__ = "tickets"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    code: Mapped[str] = mapped_column(String(100), unique=True)
+    code: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True),
+        unique=True,
+        default=uuid.uuid4,
+        index=True
+    )
     status: Mapped[TicketStatus] = mapped_column(
-        Enum(TicketStatus), default=TicketStatus.AVAILABLE
+        Enum(TicketStatus),
+        default=TicketStatus.RESERVED
     )
 
-    order_item: Mapped["OrderItem"] = relationship(back_populates="tickets")
+    order_item: Mapped["OrderItem"] = relationship(
+        back_populates="tickets"
+    )

@@ -7,11 +7,12 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .base import Base, TimestampMixin
 
 
-class TicketStatus(enum.Enum):
+class TicketStatus(str, enum.Enum):
     AVAILABLE = "AVAILABLE"
     RESERVED = "RESERVED"
     SOLD = "SOLD"
     CANCELLED = "CANCELLED"
+    USED = "USED"
 
 
 class Ticket(Base, TimestampMixin):
